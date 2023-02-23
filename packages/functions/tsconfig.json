@@ -1,0 +1,11 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es2017",
+    "baseUrl": ".",
+    "paths": {
+      "@ban-bot/core/*": ["../core/src/*"]
+    }
+  }
+}
