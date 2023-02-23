@@ -91,7 +91,7 @@ export const handler = async (_evt: {body: any, headers: any}) => {
     if (!name) return BadRequest;
     console.log(data.options[0].value)
     console.log(data.resolved.users[data.options[0].value]);
-    if (name === "banned") {
+    if (name === "void") {
       const uid = data.options[0].value;
       const params: aws.DynamoDB.UpdateItemInput = {
         TableName: process.env.DDB_TABLE!,
@@ -118,11 +118,11 @@ export const handler = async (_evt: {body: any, headers: any}) => {
 
       console.log(res);
       if(!res || !res.Attributes) return InternalError
-      const banCount = res.Attributes[uid].N;
+      const voidCount = res.Attributes[uid].N;
       const msg: DiscordCommandResponse = {
         type: 4,
         data: {
-          content: `${data.resolved.users[data.options[0].value].username} has been banned ${Number(banCount) == 1 ? banCount + " time" : banCount + " times"}!!`
+          content: `${data.resolved.users[data.options[0].value].username} has been tossed into the void ${Number(voidCount) == 1 ? voidCount + " time" : voidCount + " times"}!!`
         }
       }
       return msg

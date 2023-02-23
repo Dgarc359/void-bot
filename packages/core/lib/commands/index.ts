@@ -1,1 +1,1 @@
-export * from './banned';
+export * from './void';
